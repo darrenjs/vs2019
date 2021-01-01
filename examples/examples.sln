@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "session2", "session2\sessio
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "python", "python\python.pyproj", "{5B01320C-D584-445A-A164-6DA5D14B3C9B}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "basic_vector", "basic_vector\basic_vector.vcxproj", "{869717DF-A60C-485D-AB2C-39938D29FF39}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,16 @@ Global
 		{5B01320C-D584-445A-A164-6DA5D14B3C9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B01320C-D584-445A-A164-6DA5D14B3C9B}.Release|x64.ActiveCfg = Release|Any CPU
 		{5B01320C-D584-445A-A164-6DA5D14B3C9B}.Release|x86.ActiveCfg = Release|Any CPU
+		{869717DF-A60C-485D-AB2C-39938D29FF39}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{869717DF-A60C-485D-AB2C-39938D29FF39}.Debug|x64.ActiveCfg = Debug|x64
+		{869717DF-A60C-485D-AB2C-39938D29FF39}.Debug|x64.Build.0 = Debug|x64
+		{869717DF-A60C-485D-AB2C-39938D29FF39}.Debug|x86.ActiveCfg = Debug|Win32
+		{869717DF-A60C-485D-AB2C-39938D29FF39}.Debug|x86.Build.0 = Debug|Win32
+		{869717DF-A60C-485D-AB2C-39938D29FF39}.Release|Any CPU.ActiveCfg = Release|Win32
+		{869717DF-A60C-485D-AB2C-39938D29FF39}.Release|x64.ActiveCfg = Release|x64
+		{869717DF-A60C-485D-AB2C-39938D29FF39}.Release|x64.Build.0 = Release|x64
+		{869717DF-A60C-485D-AB2C-39938D29FF39}.Release|x86.ActiveCfg = Release|Win32
+		{869717DF-A60C-485D-AB2C-39938D29FF39}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
