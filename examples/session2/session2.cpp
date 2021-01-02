@@ -244,6 +244,23 @@ struct FxPair {
 };
 
 
+/*
+FxPair   gbpusd    ("GBP", "USD");
+^^^^^^   ^^^^^^^   ^^^^^^^^^^^^^
+
+Type   var.name  value (construction argument)
+
+
+price_trade(int quantity, FxPair ccy)    
+    ccy = pd.DataFrame();     // ERROR!!!!!  allowed in python, but not in C++
+*/ 
+
+/*
+void price_risk(TradePosition positions, BookID book, Snapshot mkt, RefData refdata)
+{
+	print(positions)
+}
+*/
 
 struct FxRate {
 	FxPair pair;
@@ -377,7 +394,7 @@ objects
 names
 -----
   df -------^
-  pos ------^
+  pos ------^   (here, pos was defined as a reference)
 
 */
 
