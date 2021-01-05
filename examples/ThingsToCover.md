@@ -17,12 +17,11 @@ Fundamentals
 - returning values from a function
 - c++ cares about efficiency
 - const & static
-- scope & lifetime
 - enums
 - initialisers
 - namespace
 - preprocessor
-- exceptions
+- exceptions (throw, catch)
 - string operations
 - modularity (headers & libraries)
 - program flow, if, while, switch, for (inc. range based)
@@ -31,6 +30,9 @@ Fundamentals
 - command line parsing
 - conditional operator
 - header files
+- heap variables
+- spinning (watch CPU resource)
+- asserts
 
 
 Tips
@@ -41,6 +43,10 @@ Tips
 - dealing with compiler errors
 - logging
 
+Techniques
+==========
+
+- unittests
 
 Forgetting Python
 =================
@@ -68,7 +74,9 @@ Class Design
 
 If you think you need to know about classes, then you need to know essentials of class design:
 
-- basic class pattern
+- basic class concept
+- constructors
+- destructors
 - virtual classes
 - override
 - move semantics

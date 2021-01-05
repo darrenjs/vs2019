@@ -34,7 +34,9 @@ import FxLib
 
 // New Trade API
 
-// struct (and class) defines a type, so Trade is now a type,  **just like int**
+// struct (and class) defines a (user) type, so Trade is now a type,  **just like int**
+
+// first class citizens in the C++ type universe
 
 // idea is encapsulation of related data
 
@@ -78,29 +80,56 @@ struct OptionContract {
 
 struct OptionPricing
 {
-	double call;
-	double put;
-	//std::string model_name;
+	double call; // the call price
+	double put;  // the put price
 };
 
- std::vector< OptionPricing> price_contracts(std::vector< OptionContract> contracts) {
+#include <vector>
 
-	 std::vector< OptionPricing> prices;
-	 
-	for (constract : contracts) {
-		double call = call_price(constract);
-		double put = put_price(constract);
+ std::vector< OptionPricing > price_contracts(std::vector<OptionContract> contracts) {
 
+	 // define our return value
+	 std::vector< OptionPricing> list_of_prices;   // [  [OptionPricing]  [OptionPricing]   ]
+	  
+     // contracts: [  [ OptionContract1] [OptionContract2]  ]
+	for (OptionContract contract : contracts) {
+
+
+		// use local variables to store result of calcualtion
+		double call = call_price(contract);
+		double put = put_price(contract);
+
+		
 		OptionPricing pricing;
 		pricing.call = call;
 		pricing.put = put;
-		prices.push_back(pricing);
+		
 
-		//OptionPricing 
+		list_of_prices.push_back(pricing);
 	}
-
-	return prices;
+	 // [  [OptionPricing1]  [OptionPricing2] ]
+	return list_of_prices;  // return our calcualed prices
 }
+
+
+
+
+ std::vector< OptionPricing > price_contracts_2(std::vector<OptionContract> contracts) 
+ {
+	 // define our return value
+	 std::vector< OptionPricing> list_of_prices;   
+
+	 for (const OptionContract & contract : contracts) 
+	 {
+		 OptionPricing pricing;
+		 pricing.call = call_price(contract);
+		 pricing.put = put_price(contract);
+		 list_of_prices.push_back(pricing);
+
+	 }
+	 // [  [OptionPricing1]  [OptionPricing2] ]
+	 return list_of_prices;  // return our calcualed prices
+ }
 
 struct CsvReader
 {
@@ -255,6 +284,9 @@ void analysis() {
 }
 
 
+
+
+
 void analysis_v2() {
 
 	// build an example trade
@@ -269,9 +301,9 @@ void analysis_v2() {
 	trade.volume = 100.0;
 	trade.price = 0.97;
 	//char side;
-	char optionType = FORWARD;
 	std::string instumentId = "USD/NZD";
 	std::string ccy = "USD";
+	char optionType = FORWARD;
 
 	double trade_value_usd = price_trade_v2(trade, optionType, instumentId, ccy);
 	store_trade_v2(trade, optionType, instumentId, ccy, trade_value_usd);
