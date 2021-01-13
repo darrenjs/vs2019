@@ -11,6 +11,7 @@ Fundamentals
 - c++ different versions (c++98, c++11, c++17, c++20)
 - printing to screen
 - basic varibles
+- const char *   (just means string)
 - pointers & nullptr
 - primitive arrays
 - pass by copy, pass by pointer, pass by reference

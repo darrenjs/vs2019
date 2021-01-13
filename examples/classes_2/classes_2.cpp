@@ -195,13 +195,131 @@ double d_j_2(const int& j, OptionContract oc) {
 }
 
 
+/* Framework has a class to represent a price, which is just a double 
+   and a flag to indicate NaN*/
+struct Real {
+	double value;
+	bool  is_nan; 
+
+	bool is_zero() {
+		return value < 0.000001;
+	}
+};
+
 // Calculate the European vanilla call price based on
 // underlying S, strike K, risk-free rate r, volatility of
 // underlying sigma and time to maturity T
-double call_price(const double& S, const double& K, const double& r, const double& v, const double& T) {
-	return S * norm_cdf(d_j(1, S, K, r, v, T)) - K * exp(-r * T) * norm_cdf(d_j(2, S, K, r, v, T));
+Real call_price(const Real& S, const Real& K, const Real& r, const Real& v, const Real& T)
+{
+	// essential checks to obey the 'contract' that bad/missing input
+	// leads to no-price
+
+
+	// define a special value for no price
+    Real no_price;
+	no_price.value = 0.0; // not needed
+	no_price.is_nan = true;
+
+	// 0.500000000000000000000003"
+	// 0.25
+	// 0.25
+	// 0.000000000000000000000003
+	if (S.is_zero()) {  /* dangerous! to check 0.0 */
+	}
+
+	
+	/* minimal input verification */
+	if (S.is_nan)
+		return no_price;
+
+
+	if (S == nan)
+		return no_price;
+
+	if (K == nan)
+		return no_price;
+
+
+	return S * norm_cdf(d_j(1, S, K, r, v, T)) - K * exp(-r * T) * norm_cdf(d_j(2, S, K, r, v, T));  
 }
 
+// sets is_nan if missing data
+Real read_value_from_record( std::string field);
+
+
+std::vector<double> price_trades() {
+
+    std:vector <double> all_prices;
+	std::vector <OptionContract> all_contracts = database_get_trades(); // return 10,000 contracts
+
+	for (contract : all_contracts) {
+
+		/*
+		  'S' was missing, we get exception -- 
+		  'S' is blank, which means is missing for that record
+
+		*/
+
+		/* pre-verification [OPTIONAL] */
+		// TODO: check S is not empty
+		// TODO: check r is postive
+		// ......  throw PricerInputError("failed on record number 50000, for S");
+
+		/* parsing -- converting from CSV to double  -- mandatory */
+
+
+		// this is heart of it ... how to we parse missing/bad data?  
+		// in python, is NaN.
+		// is that true of every framework?  
+		// assume:  missing input lead to a NaN   , we assume the framework is doing this
+
+
+
+		OptionContract oc;
+		const double S = stod(dict['S']);  /// does this throw on a blank string? 
+		const double K = 2.0;
+		const double r = 3.0;
+		const double v = 1.0;
+		const double T = 0.0;
+
+		
+		
+		// error propgation , bad values get turned into NaN , so that call_price returns a NaN
+
+		// (1) need to avoid junk input leading junk output
+		// (2) informative error detecting, save the user exploring themselves
+
+		double price = call_pricer(S, K, r, v, T); /* */ 
+		all_prices.push_back(price);
+		// post-verification -- we only run post-verification for failed trades
+
+
+
+		if (price == nan) {
+			// do verification here
+			// computer know (1) pricer failed  (2) the input data, eg, S, K etc
+
+			if (S == NaN) cout << "S is NaN";
+			if (K == NaN) cout << "K is NaN";
+		}
+
+	}
+
+	// Perform the price verification entirely outside of the 
+	// main pricing loop.
+	for (size_t i = 0; i < all_prices.size(); i++) {
+		if (all_prices[i] == nan) {
+			if (all_conctracts[i].S == NaN) cout << "S is NaN";
+			if (all_conctracts[i].K == NaN) cout << "S is NaN";
+			if (all_conctracts[i].r == NaN) cout << "S is NaN";
+			if (all_conctracts[i].t == NaN) cout << "S is NaN";
+			// we dont have S !!!!
+		}
+	}
+
+	
+	return all_prices;
+}
 
 
 double call_price_v2(OptionContract oc) {
